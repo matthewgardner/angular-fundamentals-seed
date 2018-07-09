@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
 import { Passenger } from './../../models/passenger.interface'
+
 @Component ({
     selector: 'passenger-detail',
     styleUrls: ['passenger-details.component.scss'],
@@ -20,9 +20,6 @@ import { Passenger } from './../../models/passenger.interface'
             <div class="date">
                 Check in Date:
                 {{ detail.checkInDate ? (detail.checkInDate | date: 'yMMMd') : 'Not Checked in' }}
-            </div>
-            <div class="children">
-                Children: {{ detail.children?.length }}
             </div>
             <button (click)="toggleEdit()" >
                {{ editing ? 'Done' : 'Edit'}}  
