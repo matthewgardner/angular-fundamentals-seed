@@ -31,10 +31,8 @@ export class PassengerDashboardComponent {
         console.log('PassengerDashboardComponent - ngOnInit');
         this.passengerService
             .getPassengers()
-            .subscribe((data: Passenger[]) => {
-                console.log(data);
-                this.passengers = data;
-            });
+            .subscribe((data: Passenger[]) => this.passengers = data,
+                       (error: any) => console.log(error));
     }
 
     handleEdit(event: Passenger) {
