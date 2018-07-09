@@ -24,12 +24,22 @@ export class PassengerDashboardComponent {
 
     }
     
-    handleEdit(event){
-        console.log('handleRemove: ' , event);
+    handleEdit(event: Passenger){
+        console.log('handleEdit: ' , event);
+        this.passengers = this.passengers.map((passenger: Passenger) => {
+         if (passenger.id === event.id) {
+             passenger = Object.assign({}, passenger, event);
+         }
+         return passenger;
+        });
+        console.log(this.passengers);
     }
 
-    handleRemove(event) {
+    handleRemove(event :Passenger) {
         console.log('handleRemove: ' , event);
+        this.passengers = this.passengers.filter((passenger: Passenger) => {
+           return passenger.id !== event.id; 
+        });
     }
 
     ngOnInit(){
