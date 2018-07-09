@@ -1,7 +1,9 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+
 import { Passenger } from './../../models/passenger.interface'
 
-@Component ({
+@Component({
     selector: 'passenger-detail',
     styleUrls: ['passenger-details.component.scss'],
     template: `
@@ -27,6 +29,9 @@ import { Passenger } from './../../models/passenger.interface'
              <button (click)="onRemove()" >
                 Remove  
            </button>
+           <button (click)="gotoPassenger()" >
+            View  
+           </button>
          </div>
     `
 })
@@ -36,19 +41,22 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
     detail: Passenger
 
     @Output()
-    edit: EventEmitter<any> = new  EventEmitter();
-    
+    edit: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
     @Output()
-    remove: EventEmitter<any>= new EventEmitter();
+    remove: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
+    @Output()
+    view: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
     editing: boolean = false;
-    
-    constructor() {}
-    
+
+    constructor() { }
+
     ngOnChanges(changes) {
-        console.log('ngOnChanges',changes);
-        if(changes.detail) {
-            this.detail = Object.assign({},changes.detail.currentValue);
+        console.log('ngOnChanges', changes);
+        if (changes.detail) {
+            this.detail = Object.assign({}, changes.detail.currentValue);
         }
     }
 
@@ -65,10 +73,14 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
         if (this.editing) {
             this.edit.emit(this.detail);
         }
-        this.editing =!this.editing;
+        this.editing = !this.editing;
     }
 
-    onRemove(){
+    onRemove() {
         this.remove.emit(this.detail);
+    }
+
+    gotoPassenger() {
+        this.view.emit(this.detail);
     }
 }
